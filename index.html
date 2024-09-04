@@ -63,6 +63,15 @@
     margin-bottom: 10px;
 }
 
+.popup-image {
+    display: block;
+    margin: 10px auto 0 auto; /* Center the image and add margin at the top */
+    width: 180px;
+    height: 100%;
+	margin-bottom: 3px;
+	border-radius: 4px;
+}
+
 .chat-box {
     height: 120px; /* Adjust height to fit content */
     overflow-y: auto;
@@ -268,10 +277,10 @@ button:hover {
     </a>  </a> </h1>
     <div id="map"></div>
     <div id="search-container">
-        <input type="text" id="search-input" placeholder="Enter Delivery Code..." />
-        <button id="search-button">Search</button>
+        <input type="text" id="search-input" placeholder="Enter User ID..." />
+        <button id="search-button">Chat</button>
     </div>
-    <footer>Click in the center to start.</footer>
+    <footer>Click any icon to start.</footer>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://sdk.amazonaws.com/js/aws-sdk-2.140.0.min.js"></script>
@@ -316,7 +325,7 @@ button:hover {
 
     const popupContent = `
         <div class="popup-content">
-            <div class="popup-title">Delivery Code: ${orderCode}</div>
+            <div class="popup-title">User ID: ${orderCode}</div>
             <div class="chat-box" id="chatBox-${date01}"></div>
             <textarea id="chatInput-${date01}" class="chat-input" placeholder="Type your message here..."></textarea>
             <button onclick="sendMessage('${orderCode}', '${date01}')">
@@ -344,17 +353,10 @@ button:hover {
             },
             chat: [
                 {
-                    message: `Welcome! Please note down your delivery code: ${orderCode}`,
-                    timestamp: new Date().toLocaleTimeString()
-                },
-                {
-                    message: 'You can reopen this chat anytime by searching your Delivery Code.',
-                    timestamp: new Date().toLocaleTimeString()
-                },
-                {
-                    message: 'Tell us what to pick & bring..?',
+                    message: `Welcome! Please note down your User ID: ${orderCode}`,
                     timestamp: new Date().toLocaleTimeString()
                 }
+               
             ],
             clickTimestamp: timestamp // Adding timestamp to the item
         }
@@ -381,7 +383,7 @@ function sendTelegramNotification(orderCode, latlng) {
     const googleMapsUrl = `https://www.google.com/maps?q=${lat},${lng}`;
     
     // Create the message text
-    const message = `EINDHOVEN\nDelivery Code: ${orderCode}\nLocation: [View on Google Maps](${googleMapsUrl})`;
+    const message = `EINDHOVEN\nUser ID: ${orderCode}\nLocation: [View on Google Maps](${googleMapsUrl})`;
 
     // Encode the message for the URL
     const encodedMessage = encodeURIComponent(message);
@@ -544,7 +546,8 @@ function sendTelegramMessageNotification(orderCode, message) {
                             .setLatLng(latlng)
                             .setContent(`
                                 <div class="popup-content">
-                                    <div class="popup-title">Delivery Code: ${item.orderCode}</div>
+                                    <div class="popup-title">User ID: ${item.orderCode}</div>
+									
                                     <div class="chat-box" id="chatBox-${item.date01}"></div>
                                     <textarea id="chatInput-${item.date01}" class="chat-input" placeholder="Type your message here..."></textarea>
                                     <button onclick="sendMessage('${item.orderCode}', '${item.date01}')">Send</button>
@@ -568,7 +571,80 @@ function sendTelegramMessageNotification(orderCode, message) {
         });
 
         
+	map.on('click', onMapClick);
+		
 	
+	var jsonData3 = { "lng" : { "N" : "5.467071533203125" }, "lat" : { "N" : "51.43838668752184" } };
+
+var latitude3 = parseFloat(jsonData3.lat.N);
+var longitude3 = parseFloat(jsonData3.lng.N);
+
+
+
+
+
+var customIcon3 = L.icon({
+    iconUrl: 'https://raw.githubusercontent.com/Tarikul-Islam-Anik/Telegram-Animated-Emojis/main/People/Man%20Shrugging.webp', // Use your own URL
+    iconSize: [40, 40], // Adjust size as needed
+    iconAnchor: [0, 0], // Adjust anchor as needed
+    popupAnchor: [0, 0] // Adjust popup position as needed
+});
+
+
+
+L.marker([latitude3, longitude3], { icon: customIcon3 }).addTo(map)
+    .bindPopup(`
+        <div style="background-color: #f8f9fa; padding: 2px; border-radius: 5px;">
+            <h3 style="background-color: #df3056; color: white; padding: 3px; margin: 0; border-radius: 5px 5px 0 0;">User ID: IYYNXQ</h3>
+			 <img src="https://scontent-bru2-1.xx.fbcdn.net/v/t39.30808-6/448172885_122110422026336061_7454065492445296313_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=H-CojnUL3UoQ7kNvgEfa02T&_nc_ht=scontent-bru2-1.xx&oh=00_AYCWjp6ppXrG4NRc9DSqu1AK4P4GLGaoaD2fcXNvlCdcGg&oe=66DE883F" alt="Popup Image" class="popup-image">
+            <div style="padding: 2px;">
+                <strong>Cleaning Service</strong> <br>
+                I can help you in: <br>
+                - Gardening <br>
+                - Cleaning <br>
+                - Moving Stuff. <br>
+		<strong> 12€/Hour </strong><br>
+		To chat with me search: IYYNXQ <br>
+		
+            </div>
+        </div>
+    `);
+	
+	var jsonData3 = { "lng" : { "N" : "5.472908020019532" }, "lat" : { "N" : "51.44448562941091" } };
+
+var latitude3 = parseFloat(jsonData3.lat.N);
+var longitude3 = parseFloat(jsonData3.lng.N);
+
+
+
+
+
+var customIcon3 = L.icon({
+    iconUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTCeDw8GDIiS2GDhjfjAbq9HSYQi81y0NfOQ&s', // Use your own URL
+    iconSize: [30, 30], // Adjust size as needed
+    iconAnchor: [0, 0], // Adjust anchor as needed
+    popupAnchor: [0, 0] // Adjust popup position as needed
+});
+
+
+
+L.marker([latitude3, longitude3], { icon: customIcon3 }).addTo(map)
+    .bindPopup(`
+        <div style="background-color: #f8f9fa; padding: 2px; border-radius: 5px;">
+            <h3 style="background-color: #df3056; color: white; padding: 3px; margin: 0; border-radius: 5px 5px 0 0;">User ID: IYYNXQ</h3>
+			 <img src="https://scontent-bru2-1.xx.fbcdn.net/v/t39.30808-1/271812542_2593853130758268_2722321391064448920_n.jpg?stp=dst-jpg_s200x200&_nc_cat=100&ccb=1-7&_nc_sid=0ecb9b&_nc_ohc=OFlZOIVKf4oQ7kNvgHkP9HA&_nc_ht=scontent-bru2-1.xx&oh=00_AYArQDFBD8KzE0kCfXPlg4KD2a5OxXo1IkkuJ9mUNAMN2Q&oe=66DE8DEC" alt="Popup Image" class="popup-image">
+            <div style="padding: 2px;">
+                <strong>FaceBook Marketplace</strong> <br>
+                I Pickup & bring: <br>
+                - FaceBook Marketplace items <br>
+                - Chat with me to know how it works. <br>
+                
+		<strong> 5€/Delivery </strong><br>
+		To chat with me search: 6H3IOR <br>
+		
+            </div>
+        </div>
+    `);
 	
 	
 
